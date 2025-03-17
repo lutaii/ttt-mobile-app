@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ttt_mobile_app/screens/game1_screen.dart';
+import 'package:ttt_mobile_app/screens/game_screen.dart';
 import '../providers/lobby_provider.dart';
 
 class LobbyScreen extends StatelessWidget {
@@ -17,11 +19,12 @@ class LobbyScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (lobbyProvider.message != null)
-                  Text(lobbyProvider.message!, style: TextStyle(fontSize: 18)),
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
+                    Navigator.of(
+                      context,
+                    ).push(MaterialPageRoute(builder: (_) => GameScreen()));
                     lobbyProvider.createLobby();
                   },
                   child: Text('Create Lobby'),
@@ -39,19 +42,20 @@ class LobbyScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     final code = joinController.text.trim();
                     if (code.isNotEmpty) {
-                      lobbyProvider.joinLobby(code);
+                      bool success = await lobbyProvider.joinLobby(code);
+                      if (success) {
+                        // Navigate to waiting screen (which shows "Game started!")
+                        Navigator.of(
+                          context,
+                        ).push(MaterialPageRoute(builder: (_) => GameScreen()));
+                      }
                     }
                   },
                   child: Text('Join Lobby'),
                 ),
-                if (lobbyProvider.lobbyCode != null)
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('Your Lobby Code: ${lobbyProvider.lobbyCode}'),
-                  ),
               ],
             ),
           );

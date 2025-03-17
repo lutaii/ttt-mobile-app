@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:ttt_mobile_app/models/four_in_a_row_model.dart';
 import 'package:ttt_mobile_app/providers/lobby_provider.dart';
 import 'package:ttt_mobile_app/screens/four_in_a_row_screen.dart';
-import 'package:ttt_mobile_app/screens/game_screen.dart';
+import 'package:ttt_mobile_app/screens/game1_screen.dart';
 import 'package:ttt_mobile_app/screens/lobby_screen.dart';
 
 import 'models/tic_tie_toe_model.dart';
