@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
+import 'package:ttt_mobile_app/models/four_in_a_row_model.dart';
+import 'package:ttt_mobile_app/screens/four_in_a_row_screen.dart';
 import 'package:ttt_mobile_app/screens/game_screen.dart';
 
 import 'models/tic_tie_toe_model.dart';
@@ -12,7 +14,7 @@ void main() async {
   await Firebase.initializeApp();
   runApp(
     ChangeNotifierProvider(
-      create: (context) => TicTacToeModel(),
+      create: (context) => FourInARowLimitedModel(),
       child: MyApp(),
     ),
   );
@@ -52,6 +54,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Tic Tac Toe Online', home: GameScreen());
+    return MaterialApp(
+      title: 'Tic Tac Toe Online',
+      home: FourInARowLimitedScreen(),
+    );
   }
 }
